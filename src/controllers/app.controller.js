@@ -68,6 +68,7 @@ exports.load = (req, res) => {
                     .catch(error => res.send(`Login Error: ${error.code} ${error.message}`));
 
                 res.send(`¡Se cargaron ${addedEpisodes} nuevos episodios! Muchas gracias 😄`);
+                res.redirect('https://bibleinayearnotes.web.app/');
             })
             .catch(err=>res.send(`Spotify error: ${err}`));
     });
