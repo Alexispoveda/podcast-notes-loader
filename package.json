@@ -1,0 +1,20 @@
+{
+  "name": "podcast-update",
+  "version": "1.0.0",
+  "description": "App for fetching episodes from Spotify API and load them in Firestore",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spotify"
+  ],
+  "author": "Alexis Poveda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^8.6.0",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}
