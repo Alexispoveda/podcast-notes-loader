@@ -1,4 +1,6 @@
-const spotify = require('../config/spotify.config')
+const path = require('path');
+
+const spotify = require('../config/spotify.config');
 
 const {db} = require('../config/firebase.config');
 const {auth} = require('../config/firebase.config');
@@ -47,8 +49,6 @@ exports.load = (req, res) => {
                     }
                 });
 
-                let addedEpisodes = 0;
-                
                 auth.signInWithEmailAndPassword(process.env.FIREBASE_USER, process.env.FIREBASE_PASSWORD)
                     .then(() => {
                         db.collection('episodios').get()
@@ -60,15 +60,14 @@ exports.load = (req, res) => {
                                 appEpisodesLength+=1
                                 let addedEpisode = formattedEpisodes.find(episode => episode.dia == appEpisodesLength)
                                 db.collection('episodios').add(addedEpisode)
-                                    .then(()=>{addedEpisodes+=1})
                                     .catch(err=>res.send(`Firebase error: ${err}`));
                             }
                         })
                     })
                     .catch(error => res.send(`Login Error: ${error.code} ${error.message}`));
 
-                res.send(`¡Se cargaron ${addedEpisodes} nuevos episodios! Muchas gracias 😄`);
-                res.redirect('https://bibleinayearnotes.web.app/');
+                // res.send(`¡La aplicación esta al día! Muchas gracias 😄`);
+                res.sendFile('response.html',{root: path.join(__dirname, '../../public')});
             })
             .catch(err=>res.send(`Spotify error: ${err}`));
     });
